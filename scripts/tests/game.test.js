@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const { test } = require("@jest/globals");
+
 const { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn } = require("../game");
 
 jest.spyOn(window, "alert").mockImplementation(()=> {});
@@ -101,5 +101,11 @@ jest.spyOn(window, "alert").mockImplementation(()=> {});
          game.playerMoves.push("wrong");
          playerTurn();
          expect(window.alert).toBeCalledWith("Wrong move!");
+     });
+     test("click during computer sequence should fail",() => {
+         showTurns();
+         game.lastButton="";
+         document.getElementById("button2").click();
+         expect(game.lastButton).toEqual("");
      });
  })
