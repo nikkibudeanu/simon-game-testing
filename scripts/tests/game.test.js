@@ -56,6 +56,12 @@ const { game, newGame, showScore, addTurn, lightsOn, showTurns } = require("../g
      test("should clear the player moves array", ()  => {
          expect(game.playerMoves.length).toBe(0);
      });
+     test("data listener attribute to be true", () =>{
+         const elements = document.getElementsByClassName("circle");
+         for(let element of elements){
+             expect(element.getAttribute("data-listener")).toEqual("true");
+         }
+     });
  });
 
 
