@@ -2,8 +2,10 @@
  * @jest-environment jsdom
  */
 
+const { test } = require("@jest/globals");
 const { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn } = require("../game");
 
+jest.spyOn(window, "alert").mockImplementation(()=> {});
 
  beforeAll(() => {
      let fs = require("fs");
@@ -94,5 +96,10 @@ const { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn } = r
          game.playerMoves.push(game.currentGame[0]);
          playerTurn();
          expect(game.score).toBe(1);
-     })
+     });
+     test("should call an allert if the move is wrong", () => {
+         game.playerMoves.push("wrong");
+         playerTurn();
+         expect(window.alert).toBeCalledWith("Wrong move!");
+     });
  })
